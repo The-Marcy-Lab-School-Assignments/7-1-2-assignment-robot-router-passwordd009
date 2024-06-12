@@ -1,19 +1,20 @@
 // TODO: 
 // - Pull the id from the url params list to render the correct bot
 // - If there are no robots, navigate the user back to the home page "/"
-
+import { useParams } from 'react-router-dom';
 import { useContext } from 'react';
 import RobotContext from '../context/RobotContext';
 import NotFoundPage from '../pages/NotFoundPage';
 
 const BotSpecs = () => {
+  const { id } = useParams();
   const { robots } = useContext(RobotContext);
 
   // TIP: remember that the `id` from the URL is a string
   // here we are hard-coding the id. How can you get it from the URL?
 
-  const id = 1
-  const bot = robots.find((robot) => robot.id === id)
+  const bot = robots.find((robot) => robot?.id === id)
+  console.log(bot)
   if (!bot) return <NotFoundPage />
 
   const botClassIcon = (bot_class) => {
